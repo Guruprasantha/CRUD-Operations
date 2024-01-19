@@ -1,0 +1,52 @@
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Library.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Library Book details</h2>   
+  {% include 'messages.html' %}        
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name of the Book</th>
+        <th>Author</th>
+        <th>Overview</th>
+        <th>Date of publication</th>
+        <th>Language</th>
+        <th>Delete</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if data %}
+      {% for d in data %}
+      <tr>
+        <td>{{d.book_name}}</td>
+        <td>{{d.author}}</td>
+        <td>{{d.overview}} </td>
+        <td>{{d.date_of_publication}}</td>
+        <td>{{d.language}}</td>
+
+        <td><a href="{% url 'delete' d.id %}" class="btn btn-default">Click here</button></td>
+          <td><a href="{% url 'edit' d.id %}" class="btn btn-default">Click here</button></td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+
+  <button type="button" onclick="window.location.href=`{% url 'add' %}`" class="btn btn-default">Add Book</button>
+</div>
+
+</body>
+</html>
+{%endblock%}
